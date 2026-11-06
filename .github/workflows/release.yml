@@ -1,0 +1,60 @@
+name: Build and publish HAR
+on:
+  push:
+    branches: [main]
+    tags: ['v[0-9]*.[0-9]*.[0-9]*']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: har-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  har:
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/dalongzhuazi/harmonyos-ci@sha256:07433d62987065c0423025abeeb9ae35eabd21f7394b109ae6c9d74e679c41b1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Audit source and build HAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DEVECO_CLI_CLT_PATH="${DEVECO_SDK_HOME%/sdk}"
+          grep -Eq '^apiVersion[[:space:]]*:[[:space:]]*26' "$DEVECO_CLI_CLT_PATH/version.txt"
+          version="$(python3 -c 'import json; print(json.load(open("library/oh-package.json5"))["version"])')"
+          if [[ "$GITHUB_REF_TYPE" == tag ]]; then
+            [[ "$GITHUB_REF_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+            test "$GITHUB_REF_NAME" = "v$version"
+          fi
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          python3 scripts/check-source.py
+          python3 scripts/build.py
+          "$DEVECO_CLI_CLT_PATH/bin/ohpm" prepublish "dist/session-manager-sdk-$version.har"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-har
+          path: |
+            dist/*.har
+            dist/*.har.sha256
+          if-no-files-found: error
+  release:
+    if: github.ref_type == 'tag'
+    needs: har
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-har
+      - name: Publish Release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          asset="session-manager-sdk-${GITHUB_REF_NAME#v}.har"
+          sha256sum -c "$asset.sha256"
+          gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --verify-tag --latest --generate-notes "$asset" "$asset.sha256"

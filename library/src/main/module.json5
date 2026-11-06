@@ -1,0 +1,8 @@
+{
+  "module": {
+    "name": "session_manager_sdk",
+    "type": "har",
+    "deviceTypes": ["2in1"],
+    "requestPermissions": [{ "name": "ohos.permission.INTERNET" }]
+  }
+}

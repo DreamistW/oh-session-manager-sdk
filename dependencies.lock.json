@@ -1,0 +1,14 @@
+{
+  "libssh2-oh": {
+    "name": "libssh2-oh",
+    "version": "0.1.1",
+    "url": "https://github.com/DreamistW/libssh2-oh/releases/download/v0.1.1/libssh2-oh-0.1.1.har",
+    "sha256": "a2945c6f760cf8e8014d163a3a1c0c8de3dbf1836410f1bb6403a9d040519919"
+  },
+  "mbedtls-oh": {
+    "name": "mbedtls-oh",
+    "version": "0.1.0",
+    "url": "https://github.com/DreamistW/mbedtls-oh/releases/download/v0.1.0/mbedtls-oh-0.1.0.har",
+    "sha256": "a82b24a64120c022e03cd51174f67213d9d4d786f92cf919f3c06aa6ecc5a417"
+  }
+}

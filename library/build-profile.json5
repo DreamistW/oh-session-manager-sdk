@@ -1,0 +1,16 @@
+{
+  "apiType": "stageMode",
+  "buildOption": {
+    "arkOptions": { "byteCodeHar": false },
+    "nativeLib": {
+      "headerPath": "./include",
+      "collectAllLibs": true,
+      "debugSymbol": { "strip": false }
+    }
+  },
+  "buildOptionSet": [{
+    "name": "release",
+    "arkOptions": { "obfuscation": { "ruleOptions": { "enable": false } } }
+  }],
+  "targets": [{ "name": "default", "config": { "deviceType": ["2in1"] } }]
+}

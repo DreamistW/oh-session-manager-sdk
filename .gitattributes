@@ -1,0 +1,5 @@
+# 普通文本统一 LF；锁定的后端和补丁必须保留原始字节以匹配来源哈希。
+* text=auto eol=lf
+/native/libssh2/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# 补丁上下文中的单个空格属于原始补丁格式。
+/native/libssh2/patches/*.patch -whitespace
