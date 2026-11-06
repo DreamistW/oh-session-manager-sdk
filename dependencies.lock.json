@@ -7,8 +7,8 @@
   },
   "mbedtls-oh": {
     "name": "mbedtls-oh",
-    "version": "0.1.0",
-    "url": "https://github.com/DreamistW/mbedtls-oh/releases/download/v0.1.0/mbedtls-oh-0.1.0.har",
-    "sha256": "a82b24a64120c022e03cd51174f67213d9d4d786f92cf919f3c06aa6ecc5a417"
+    "version": "0.1.1",
+    "url": "https://github.com/DreamistW/mbedtls-oh/releases/download/v0.1.1/mbedtls-oh-0.1.1.har",
+    "sha256": "f3e33a02a28c0b2f1e9fbbd57f5759cbb3d7515e2731a1ea9d1a9e27146f49ef"
   }
 }

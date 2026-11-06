@@ -20,19 +20,19 @@ python scripts/build.py
 ```
 
 脚本下载锁定的 HAR 并校验 SHA-256。可分别通过 `--libssh2` 和 `--mbedtls`
-提供相同哈希的本地文件。结果位于 `dist/session-manager-sdk-0.1.0.har`，附 SHA-256 校验文件。
+提供相同哈希的本地文件。结果位于 `dist/session-manager-sdk-0.1.1.har`，附 SHA-256 校验文件。
 
 ## 安装与接入
 
-下载 [session-manager-sdk](https://github.com/DreamistW/oh-session-manager-sdk/releases/tag/v0.1.0)、
+下载 [session-manager-sdk](https://github.com/DreamistW/oh-session-manager-sdk/releases/tag/v0.1.1)、
 [libssh2-oh](https://github.com/DreamistW/libssh2-oh/releases/tag/v0.1.1) 和
-[mbedtls-oh](https://github.com/DreamistW/mbedtls-oh/releases/tag/v0.1.0) 的 HAR。
+[mbedtls-oh](https://github.com/DreamistW/mbedtls-oh/releases/tag/v0.1.1) 的 HAR。
 核对 SHA-256 后在宿主模块目录安装。原生依赖的版本和哈希见 [依赖锁](dependencies.lock.json)。
 
 ```sh
 ohpm install ./libssh2-oh-0.1.1.har
-ohpm install ./mbedtls-oh-0.1.0.har
-ohpm install ./session-manager-sdk-0.1.0.har
+ohpm install ./mbedtls-oh-0.1.1.har
+ohpm install ./session-manager-sdk-0.1.1.har
 ```
 
 在宿主模块 `module.json5` 的 `module` 对象中声明网络权限。
@@ -211,7 +211,7 @@ Telnet 和普通 FTP 都是明文协议。
 ## GitHub Release
 
 推送 `main` 运行构建并上传 Actions artifact。推送与包版本一致的稳定标签
-（例如 `v0.1.0`）发布经过审计的 HAR 与 SHA-256 校验文件。
+（例如 `v0.1.1`）发布经过审计的 HAR 与 SHA-256 校验文件。
 
 ## 许可
 

@@ -1,6 +1,6 @@
 {
   "name": "session-manager-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "session-manager-sdk for HarmonyOS 2in1",
   "main": "Index.ets",
   "license": "Apache-2.0",
